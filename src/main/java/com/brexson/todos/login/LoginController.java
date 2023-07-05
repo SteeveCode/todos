@@ -11,9 +11,7 @@ public class LoginController {
     //http://localhost:8080/login?name=Ranga
     //Model
     @RequestMapping("login")
-    public String gotoLoginPage(@RequestParam String name, ModelMap model) {
-        model.put("name", name);
-        System.out.println("Request param is " + name); //NOT RECOMMENDED FOR PROD CODE
+    public String gotoLoginPage() {
         return "login";
     }
 }
