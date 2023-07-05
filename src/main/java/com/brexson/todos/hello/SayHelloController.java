@@ -1,6 +1,7 @@
 package com.brexson.todos.hello;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,5 +32,10 @@ public class SayHelloController {
 
 
         return sb.toString();
+    }
+    // I changed the view technology from JSP to Thymeleaf
+    @GetMapping("say-hello-tl")
+    public String sayHelloTl() {
+        return "sayHelloTl";
     }
 }
