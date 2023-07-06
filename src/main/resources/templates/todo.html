@@ -10,6 +10,8 @@
   <h1>Enter Todo Details</h1>
   <form method="post" th:object="${todo}">
     Description: <input type="text" th:field="*{description}" name="description" required="required"/>
+      <span class="alert alert-warning" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br>
+
       <input type="hidden" th:field="*{id}" name="id"/>
       <input type="hidden" th:field="*{done}" name="done"/>
     <input type="submit" class="btn btn-success"/>
