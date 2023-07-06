@@ -1,12 +1,11 @@
 package com.brexson.todos.todo;
 
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -47,6 +46,13 @@ public class TodoController {
         todoService.addTodo(username, todo.getDescription(),
                 LocalDate.now().plusYears(1), false);
         return "redirect:list-todos";
+    }
+    @GetMapping ("delete-todo")
+    public String deleteTodo(@RequestParam int id) {
+        //Delete todo
+        todoService.deleteById(id);
+        return "redirect:list-todos";
+
     }
 
 }
