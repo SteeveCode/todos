@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="webjars/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet" >
-    <title>Title</title>
+  <title>Title</title>
 
 </head>
 <body>
@@ -12,7 +12,6 @@
   <table class="table">
     <thead>
     <tr>
-      <th>id</th>
       <th>Description</th>
       <th>Target Date</th>
       <th>Is Done?</th>
@@ -20,7 +19,6 @@
     </thead>
     <tbody>
       <tr th:each="todo : ${todos}">
-        <td>[[${todo.id}]]</td>
         <td>[[${todo.description}]]</td>
         <td>[[${todo.targetDate}]]</td>
         <td>[[${todo.done}]]</td>

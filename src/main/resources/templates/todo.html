@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link href="webjars/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="webjars/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet" >
+
     <title>Add Todo Page</title>
   </head>
 <body>
@@ -10,7 +12,12 @@
   <h1>Enter Todo Details</h1>
   <form method="post" th:object="${todo}">
     Description: <input type="text" th:field="*{description}" name="description" required="required"/>
-      <span class="alert alert-warning" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br>
+    <span class="alert alert-warning" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br>
+
+   <label class="mt-3"> Target Date:
+      <input type="text" th:field="*{targetDate}" name="targetDate" required="required"/>
+  </label>
+      <span class="alert alert-warning" th:if="${#fields.hasErrors('targetDate')}" th:errors="*{targetDate}"></span><br>
 
       <input type="hidden" th:field="*{id}" name="id"/>
       <input type="hidden" th:field="*{done}" name="done"/>
@@ -21,5 +28,11 @@
 </div>
 <script src="webjars/bootstrap/5.2.3/js/bootstrap.min.js"></script>
 <script src="webjars/jquery/3.6.4/jquery.min.js"></script>
+<script src="webjars/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $('#targetDate').datepicker({
+        format: 'yyyy-mm-dd'
+    });
+</script>
 </body>
 </html>
