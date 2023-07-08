@@ -2,7 +2,10 @@ package com.brexson.todos.todo;
 
 import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +25,8 @@ public class TodoController {
 
     @GetMapping("list-todos")
     public String listAllTodos(ModelMap model) {
-        List<Todo> todos = todoService.findByUsername("in28ms");
+        String username = getLoggedInUsername(model);
+        List<Todo> todos = todoService.findByUsername(username);
         model.addAttribute("todos", todos);
 
         return "listTodos";
@@ -60,7 +64,7 @@ public class TodoController {
         model.addAttribute("todo", todo);
         return "todo";
     }
-    @RequestMapping(value="update-todo", method = RequestMethod.POST)
+    @PostMapping(value="update-todo")
     public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
 
         if(result.hasErrors()) {
@@ -71,5 +75,8 @@ public class TodoController {
         todoService.updateTodo(todo);
         return "redirect:list-todos";
     }
-
+    private String getLoggedInUsername(ModelMap model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
+    }
 }

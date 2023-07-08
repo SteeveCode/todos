@@ -6,7 +6,7 @@
 
 <div class="container">
   <h1>Enter Todo Details</h1>
-  <form method="post" th:object="${todo}">
+  <form th:action="@{/add-todo}" method="post" th:object="${todo}">
     Description: <input type="text" th:field="*{description}" name="description" required="required"/>
     <span class="alert alert-warning" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br>
 
