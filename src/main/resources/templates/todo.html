@@ -6,7 +6,11 @@
 
 <div class="container">
   <h1>Enter Todo Details</h1>
-  <form th:action="@{/add-todo}" method="post" th:object="${todo}">
+  <form  method="post" th:object="${todo}">
+      <!-- CSRF Token -->
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+      <!-- Form fields -->
     Description: <input type="text" th:field="*{description}" name="description" required="required"/>
     <span class="alert alert-warning" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br>
 
