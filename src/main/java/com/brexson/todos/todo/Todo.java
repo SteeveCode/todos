@@ -9,6 +9,9 @@ import java.time.LocalDate;
 
 //Database (MySQL)
 //Static List of todos => Database (H2, MySQL)
+
+//JPA
+// Bean -> Database Table
 @Entity
 public class Todo {
     @Id
