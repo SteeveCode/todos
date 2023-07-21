@@ -17,7 +17,6 @@ import java.util.List;
 @Controller
 @SessionAttributes("name")
 public class TodoControllerJpa {
-
     private TodoService todoService;
     TodoRepository todoRepository;
     public TodoControllerJpa(TodoService todoService, TodoRepository todoRepository) {
