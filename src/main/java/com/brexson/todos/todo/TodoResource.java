@@ -1,6 +1,7 @@
 package com.brexson.todos.todo;
 
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
@@ -15,11 +16,20 @@ public class TodoResource {
 
     private TodoService todoService;
     public TodoResource(TodoService todoService) {
-        super(); this.todoService = todoService;
+        this.todoService = todoService;
     }
 
     @GetMapping("/users/{username}/todos")
     public List<Todo> retrieveTodos(@PathVariable String username) {
        return todoService.findByUsername(username);
+    }
+    @GetMapping("/users/{username}/todos/{id}")
+    public Todo retrieveTodo(@PathVariable String username, @PathVariable int id) {
+        return todoService.findById(id);
+    }
+    @DeleteMapping("/users/{username}/todos/{id}")
+    public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable int id) {
+        todoService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
