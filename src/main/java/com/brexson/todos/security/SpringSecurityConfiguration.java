@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.function.Function;
 
-@Configuration
+//@Configuration
 public class SpringSecurityConfiguration {
     //LDAP or Database
     //In Memory
