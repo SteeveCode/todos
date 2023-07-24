@@ -1,39 +1,35 @@
 package com.brexson.todos.todo;
 
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
-//@RestController
-public class TodoResource {
+@RestController
+public class TodoJpaResource {
     private TodoService todoService;
-    public TodoResource(TodoService todoService) {
+    private TodoRepository todoRepository;
+    public TodoJpaResource(TodoService todoService, TodoRepository todoRepository) {
         this.todoService = todoService;
+        this.todoRepository = todoRepository;
     }
 
     @GetMapping("/users/{username}/todos")
     public List<Todo> retrieveTodos(@PathVariable String username) {
-       return todoService.findByUsername(username);
+       return todoRepository.findByUsername(username);
     }
     @GetMapping("/users/{username}/todos/{id}")
     public Todo retrieveTodo(@PathVariable String username, @PathVariable int id) {
-        return todoService.findById(id);
+        return todoRepository.findById(id).get();
     }
     @DeleteMapping("/users/{username}/todos/{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable int id) {
-        todoService.deleteById(id);
+        todoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
     @PutMapping("/users/{username}/todos/{id}")
     public Todo updateTodo(@PathVariable String username, @PathVariable int id, @RequestBody Todo todo) {
-        todoService.updateTodo(todo);
+        todoRepository.save(todo);
         return todo;
     }
     @PostMapping("/users/{username}/todos")
